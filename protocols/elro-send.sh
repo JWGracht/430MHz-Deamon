@@ -19,20 +19,15 @@ fi
 
 elroframe="${elroframe}128 0 0 0"
 
-echo $elroframe
-
 export IFS=" "
 
 buffer=""
 
 for framepart in $elroframe; do
-  printf "%0*d\n" 8 $(echo "obase=2;$framepart" | bc)
   framepart=$(printf "%0*d\n" 8 $(echo "obase=2;$framepart" | bc))
   buffer="$buffer$framepart"
 done
 
 elroframe=$buffer
 
-echo $elroframe
-
-#denk aan FIFO
+echo $elroframe > /tmp/transmitterfifo
