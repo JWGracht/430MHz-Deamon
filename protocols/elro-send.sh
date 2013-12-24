@@ -30,4 +30,10 @@ done
 
 elroframe=$buffer
 
+#make frame 1.5s long
+for i in {1..90}
+do
+  elroframe="$elroframe$buffer"
+done
+
 echo $elroframe > /tmp/transmitterfifo
