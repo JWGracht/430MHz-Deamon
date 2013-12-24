@@ -31,9 +31,11 @@ done
 elroframe=$buffer
 
 #make frame 1.5s long
-for i in {1..90}
+a=0
+while [ $a -lt 90 ]
 do
   elroframe="$elroframe$buffer"
+  a=`expr $a + 1`
 done
 
 echo $elroframe > /tmp/transmitterfifo
