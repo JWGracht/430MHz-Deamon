@@ -4,15 +4,15 @@ system_code="10111"
 
 unit_code="01000" #A, B, C, D, E switch
 
-if [ "$1" = "A" ] ; then
+if [ "$1" = "E" ] ; then
   unit_code="00001"
-elif [ "$1" = "B" ] ; then
+elif [ "$1" = "D" ] ; then
   unit_code="00010"
 elif [ "$1" = "C" ] ; then
   unit_code="00100"
-elif [ "$1" = "D" ] ; then
+elif [ "$1" = "B" ] ; then
   unit_code="01000"
-elif [ "$1" = "E" ] ; then
+elif [ "$1" = "A" ] ; then
   unit_code="10000"
 fi
 
