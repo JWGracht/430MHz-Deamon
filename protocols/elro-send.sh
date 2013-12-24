@@ -4,7 +4,25 @@ system_code="10111"
 
 unit_code="01000" #A, B, C, D, E switch
 
+if [ "$1" = "A" ] ; then
+  unit_code="00001"
+elif [ "$1" = "B" ] ; then
+  unit_code="00010"
+elif [ "$1" = "C" ] ; then
+  unit_code="00100"
+elif [ "$1" = "D" ] ; then
+  unit_code="01000"
+elif [ "$1" = "E" ] ; then
+  unit_code="10000"
+fi
+
 switch=1
+
+if [ "$2" = "1" ] ; then
+  switch=1
+elif [ "$2" = "0" ] ; then
+  switch=0
+fi
 
 elroframe="$system_code$unit_code"
 
