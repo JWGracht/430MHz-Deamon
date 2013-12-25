@@ -10,6 +10,7 @@
 
 DAEMON="/home/beagle/430MHz-Deamon/430MHz-Deamon.py"
 DEAMON_NAME=430mhzdeamon
+DEAMON_USER="root"
 
 PATH="/sbin:/bin:/usr/sbin:/usr/bin"
 
@@ -19,7 +20,7 @@ test -x $DAEMON || exit 0
 
 d_start () {
   log_daemon_msg "Starting system $DEAMON_NAME Daemon"
-  start-stop-daemon --background --name $DEAMON_NAME --start --exec $DAEMON
+  start-stop-daemon --background --name $DEAMON_NAME --start --user $DEAMON_USER --exec $DAEMON
   log_end_msg $?
 }
 
