@@ -9,7 +9,7 @@
 # sudo chmod +x 430MHz-Deamon.py
 
 DAEMON="/home/beagle/430MHz-Deamon/430MHz-Deamon.py"
-DEAMON_NAME="430MHz-Deamon"
+DEAMON_NAME=430mhzdeamon
 
 PATH="/sbin:/bin:/usr/sbin:/usr/bin"
 
