@@ -7,12 +7,17 @@
 # sudo cp 430MHz-Deamon.sh /etc/init.d
 # sudo chmod +x /etc/init.d/430MHz-Deamon.sh
 # sudo chmod +x 430MHz-Deamon.py
+# sudo update-rc.d 430MHz-Deamon.sh defaults
 
 DAEMON="/home/beagle/430MHz-Deamon/430MHz-Deamon.py"
 DEAMON_NAME=430mhzdeamon
-DEAMON_USER="root"
 
-PATH="/sbin:/bin:/usr/sbin:/usr/bin"
+# This next line determines what user the script runs as.
+# Root generally not recommended but necessary if you are using the Raspberry Pi GPIO from Python.
+DAEMON_USER=root
+
+# The process ID of the script when it runs is stored here:
+PIDFILE=/var/run/$DAEMON_NAME.pid
 
 test -x $DAEMON || exit 0
 
@@ -20,13 +25,13 @@ test -x $DAEMON || exit 0
 
 d_start () {
   log_daemon_msg "Starting system $DEAMON_NAME Daemon"
-  start-stop-daemon --background --name $DEAMON_NAME --start --user $DEAMON_USER --exec $DAEMON
+  start-stop-daemon --start --background --pidfile $PIDFILE --make-pidfile --user $DAEMON_USER --startas $DAEMON
   log_end_msg $?
 }
 
 d_stop () {
   log_daemon_msg "Stopping system $DEAMON_NAME Daemon"
-  start-stop-daemon --name $DEAMON_NAME --stop --retry 5 --name $DEAMON_NAME
+  start-stop-daemon --stop --pidfile $PIDFILE --retry 10
   log_end_msg $?
 }
 
