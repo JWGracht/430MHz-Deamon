@@ -13,7 +13,7 @@ DAEMON="/home/beagle/430MHz-Deamon/430MHz-Deamon.py"
 DEAMON_NAME=430mhzdeamon
 
 # This next line determines what user the script runs as.
-# Root generally not recommended but necessary if you are using the Raspberry Pi GPIO from Python.
+# Root generally not recommended but necessary for pipeline and GPIO
 DAEMON_USER=root
 
 # The process ID of the script when it runs is stored here:
