@@ -25,6 +25,7 @@ test -x $DAEMON || exit 0
 
 d_start () {
   log_daemon_msg "Starting system $DEAMON_NAME Daemon"
+  rm -f /tmp/transmitterfifo
   start-stop-daemon --start --background --pidfile $PIDFILE --make-pidfile --user $DAEMON_USER --startas $DAEMON
   log_end_msg $?
 }
