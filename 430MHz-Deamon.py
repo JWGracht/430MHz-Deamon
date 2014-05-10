@@ -3,6 +3,7 @@
 import os
 import time
 import Adafruit_BBIO.GPIO as GPIO
+import serial
 
 class Tranceiver:
   repeat = 8 #later in config file
@@ -34,6 +35,9 @@ class Tranceiver:
               time.sleep(self.pulselength)
       GPIO.output(self.pin_out, GPIO.LOW)
       time.sleep(0.3)
+  
+  def receiver(self):
+    ser = serial.Serial('/dev/ttyS1', 19200, timeout=1)
 
 transmit = Tranceiver()
 transmit.transmitter()
