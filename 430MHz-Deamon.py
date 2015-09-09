@@ -7,7 +7,7 @@ import serial
 
 class Tranceiver:
   repeat = 8 #later in config file
-  pulselength = 0.000130 # = 130 ms (verified with logic analyser) later in config file
+  pulselength = 0.000260 # = 260 ms (verified with logic analyser) later in config file
   transmitFIFO = '/tmp/transmitterfifo'
   pin_out ="P8_17" #later in config file
 
