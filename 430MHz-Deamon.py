@@ -9,7 +9,7 @@ class Tranceiver:
   repeat = 8 #later in config file
   pulselength = 0.000260 # = 260 ms (verified with logic analyser) later in config file
   transmitFIFO = '/tmp/transmitterfifo'
-  pin_out ="P8_17" #later in config file
+  pin_out ="P8_07" #later in config file
 
   def __init__(self):
     if os.path.exists(self.transmitFIFO) :
