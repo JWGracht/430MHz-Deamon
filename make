@@ -9,3 +9,6 @@ build: 433mhzdeamon.o
 clean:
   -rm -f 433mhzdeamon.o
   -rm -f 433mhzdeamon
+
+install:
+  cp init.d/430MHz-Deamon.sh /etc/init.d/430MHz-Deamon
