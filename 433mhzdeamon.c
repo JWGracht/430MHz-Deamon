@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 #include <fcntl.h> 
 #include "lib/beaglebone_gpio.h"
+#include "lib/SimpleGPIO.h"
 
 #define SERVICE_FIFO_NAME "/tmp/transmitterfifo"
 static int fifo_filestream = -1;
