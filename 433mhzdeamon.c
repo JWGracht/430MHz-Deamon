@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
     volatile unsigned int *gpio_cleardataout_addr = NULL;
     unsigned int reg;
     const char *pipe_msg = "\n";
-    int bit;
+    char bit;
   
     int fd = open("/dev/mem", O_RDWR);
 
@@ -99,8 +99,8 @@ gpio_cleardataout_addr);
         
         int i;
         for (i = 0; i < rx_length; i++){
-          sscanf(rx_buffer[i], "%d", &bit);
-          if (bit == 1) {
+          sscanf(rx_buffer[i], "%c", &bit);
+          if (bit == "1") {
             *gpio_setdataout_addr= PIN;
           } else {
             *gpio_cleardataout_addr = PIN;
