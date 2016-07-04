@@ -39,6 +39,7 @@ void close_fifo()
 int main(int argc, char *argv[]) {
     volatile void *gpio_addr = NULL;
     volatile unsigned int *gpio_oe_addr = NULL;
+    volatile unsigned int *gpio_in_addr = NULL;
     volatile unsigned int *gpio_setdataout_addr = NULL;
     volatile unsigned int *gpio_cleardataout_addr = NULL;
     unsigned int reg;
@@ -53,6 +54,7 @@ GPIO1_END_ADDR, GPIO1_SIZE);
 MAP_SHARED, fd, GPIO1_START_ADDR);
 
     gpio_oe_addr = gpio_addr + GPIO_OE;
+    gpio_in_addr = gpio_addr + GPIO_DATAIN;
     gpio_setdataout_addr = gpio_addr + GPIO_SETDATAOUT;
     gpio_cleardataout_addr = gpio_addr + GPIO_CLEARDATAOUT;
 
@@ -103,7 +105,8 @@ gpio_cleardataout_addr);
           } else {
             *gpio_cleardataout_addr = PIN;
           }
-          
+          int readval = ((*gpio_in_addr) & PIN)>0; //1 if bit is high, 0 otherwise
+          printf("pin value: %d",&readval);
           usleep(30);
         }
       }
