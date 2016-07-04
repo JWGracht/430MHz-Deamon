@@ -6,6 +6,35 @@
 #include "lib/beaglebone_gpio.h"
 
 #define SERVICE_FIFO_NAME "/tmp/transmitterfifo"
+static int fifo_filestream = -1;
+
+int create_fifo()
+{
+  int result;
+  const char *pipe_msg = "\n";
+  printf("Making FIFO...\n");
+  unlink(SERVICE_FIFO_NAME);
+  result = mkfifo(SERVICE_FIFO_NAME, 0666);
+  if (result == 0)
+  {
+    printf("New FIFO created: %s\n", SERVICE_FIFO_NAME);
+  }
+  printf("Process %d opening FIFO %s\n", getpid(), SERVICE_FIFO_NAME);
+  result = open(SERVICE_FIFO_NAME, O_RDWR);
+  if (result != -1)
+  {
+    printf("Opened FIFO: %i\n", result);
+  }
+  // write to pipo so read in function web_server will not start in end of life if the python proces is not yet up
+  write(fifo_filestream, pipe_msg, strlen(pipe_msg) + 1);
+  
+  return result;
+}
+
+void close_fifo()
+{
+  (void)close(fifo_filestream);
+}
 
 int main(int argc, char *argv[]) {
     volatile void *gpio_addr = NULL;
@@ -45,29 +74,17 @@ gpio_cleardataout_addr);
     printf("GPIO1 configuration: %X\n", reg);
     
     printf("Making FIFO...\n");
-    unlink(SERVICE_FIFO_NAME);
-    
-    int result = mkfifo(SERVICE_FIFO_NAME, 0666);
-    if (result == 0)
-    {
-      printf("New FIFO created: %s\n", SERVICE_FIFO_NAME);
-    }
-    
-    if (result != -1)
-    {
-      printf("Opened FIFO: %i\n", result);
-    }
-    // write to pipo so read in function will not start in end of life
-    write(result, pipe_msg, strlen(pipe_msg) + 1);
+    fifo_filestream = create_fifo();
     
     printf("Start program\n");
     while(1) {
       unsigned char rx_buffer[256];
-      int rx_length = read(result, (void*)rx_buffer, sizeof(rx_buffer));
+      int rx_length = read(fifo_filestream, (void*)rx_buffer, sizeof(rx_buffer));
       
       if (rx_length < 0)
       {
-
+	    close_fifo();
+	    fifo_filestream = create_fifo();
       }
       else if (rx_length == 0)
       {
@@ -89,7 +106,7 @@ gpio_cleardataout_addr);
         }
       }
     }
-    (void)close(result);
+    close_fifo();
     (void)close(fd);
     return 0;
 }
