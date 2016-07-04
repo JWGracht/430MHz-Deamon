@@ -50,7 +50,7 @@ gpio_cleardataout_addr);
     int result = mkfifo(SERVICE_FIFO_NAME, 0666);
     if (result == 0)
     {
-      printf("New FIFO created: %s\n", CANNON_SERVICE_FIFO_NAME);
+      printf("New FIFO created: %s\n", SERVICE_FIFO_NAME);
     }
     
     if (result != -1)
@@ -77,7 +77,7 @@ gpio_cleardataout_addr);
       {
         rx_buffer[rx_length] = '\0';
         
-        for (i = 0; i < rx_length; i++){
+        for (int i = 0; i < rx_length; i++){
           if (rx_buffer[i] == "1") {
             *gpio_setdataout_addr= PIN;
           } else {
