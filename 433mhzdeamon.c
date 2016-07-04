@@ -78,7 +78,7 @@ gpio_cleardataout_addr);
     
     printf("Start program\n");
     while(1) {
-      unsigned char rx_buffer[256];
+      unsigned char rx_buffer[16384];
       int rx_length = read(fifo_filestream, (void*)rx_buffer, sizeof(rx_buffer));
       
       if (rx_length < 0)
