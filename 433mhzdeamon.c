@@ -77,7 +77,8 @@ gpio_cleardataout_addr);
       {
         rx_buffer[rx_length] = '\0';
         
-        for (int i = 0; i < rx_length; i++){
+        int i;
+        for (i = 0; i < rx_length; i++){
           if (rx_buffer[i] == "1") {
             *gpio_setdataout_addr= PIN;
           } else {
