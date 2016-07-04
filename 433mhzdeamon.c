@@ -104,7 +104,7 @@ gpio_cleardataout_addr);
             *gpio_cleardataout_addr = PIN;
           }
           
-          sleep(0.000030);
+          usleep(30);
         }
       }
     }
