@@ -83,6 +83,7 @@ gpio_cleardataout_addr);
       
       if (rx_length < 0)
       {
+	    printf("rx_length<0\n");
 	    close_fifo();
 	    fifo_filestream = create_fifo();
       }
@@ -93,6 +94,7 @@ gpio_cleardataout_addr);
       else
       {
         rx_buffer[rx_length] = '\0';
+        printf("FIFO %i bytes read : %s\n", rx_length, rx_buffer);
         
         int i;
         for (i = 0; i < rx_length; i++){
