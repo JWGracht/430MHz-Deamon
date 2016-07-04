@@ -106,7 +106,7 @@ gpio_cleardataout_addr);
             *gpio_cleardataout_addr = PIN;
           }
           int readval = ((*gpio_in_addr) & PIN)>0; //1 if bit is high, 0 otherwise
-          printf("pin value: %d",&readval);
+          printf("pin value: %d",readval);
           usleep(30);
         }
       }
