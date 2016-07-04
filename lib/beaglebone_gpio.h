@@ -9,7 +9,7 @@
 #define GPIO_CLEARDATAOUT 0x190
 
 
-#define PIN (1<<12)
+#define PIN ((uint32_t)1<<12)
 
 
 #endif
