@@ -100,10 +100,8 @@ gpio_cleardataout_addr);
         for (i = 0; i < rx_length; i++){
           if (rx_buffer[i] == '1') {
             *gpio_setdataout_addr= PIN;
-            printf("Send 1");
           } else {
             *gpio_cleardataout_addr = PIN;
-            printf("Send 0");
           }
           
           usleep(30);
